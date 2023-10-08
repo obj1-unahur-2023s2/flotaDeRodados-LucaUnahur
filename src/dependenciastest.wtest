@@ -1,0 +1,80 @@
+
+import rodados.*
+import dependencias.*
+
+describe "Test de dependencias (deportes y cultura)"{
+	
+	const cultura =new Dependencia(empleados=31)
+	const deportes=new Dependencia(empleados=45)
+	const cachito = new ChevroletCorsa(color="rojo")
+	
+	method initialize(){
+		//dependencia Deportes
+		deportes.agregarAFlota(cachito)
+		deportes.agregarAFlota(new ChevroletCorsa(color='azul'))
+		deportes.agregarAFlota(new ChevroletCorsa(color="verde"))
+		deportes.agregarAFlota(new RenaultKwid(tieneTanqueAdicional=true))
+		deportes.agregarAFlota(new AutosEspeciales(peso=1200, velocidadMaxima=160, color="beige", capacidadDeTransporte=5))
+		
+		
+		//Dependencia Cultura
+		cultura.agregarAFlota(cachito)
+		cultura.agregarAFlota(new RenaultKwid(tieneTanqueAdicional=true))
+		cultura.agregarAFlota(new RenaultKwid(tieneTanqueAdicional=true))
+		cultura.agregarAFlota(new RenaultKwid(tieneTanqueAdicional=false))
+		trafic.armar(interiorPopular, motorBataton)
+		cultura.agregarAFlota(trafic)
+	}
+	//Test de deportes
+	test "Peso Total de la flota (Deportes)"{
+		assert.equals(6450,deportes.pesoTotalFlota())
+	}
+	
+	test "Esta bien equipada la flota (Deportes)"{
+		assert.that(deportes.estaBienEquipada())
+	}
+	
+	test"Capacidad Total del color azul (Deportes)"{
+		assert.equals(7, deportes.capacidadTotalEnColor("azul"))
+	}
+
+	test"Color mas rapido (Deportes)"{
+		assert.equals("beige",deportes.colorDelRodadoMasRapido())
+	}
+	
+	test "Es grande la flota (Deportes)"{
+		assert.that(deportes.esGrande())
+	}
+	
+	test "La capacidad faltante (Deportes)"{
+		assert.equals(25, deportes.capacidadFaltante())
+	}
+	
+	//test de Cultura
+	
+	test "Peso Total de la flota (Cultura)"{
+		assert.equals(10700,cultura.pesoTotalFlota())
+	}
+	
+	test "No esta bien equipada la flota (Cultura)"{
+		assert.notThat(cultura.estaBienEquipada())
+	}
+	
+	test"Capacidad Total del color azul (Cultura)"{
+		assert.equals(10, cultura.capacidadTotalEnColor("azul"))
+	}
+
+	test"Color mas rapido (Cultura)"{
+		assert.equals("rojo",cultura.colorDelRodadoMasRapido())
+	}
+	
+	test "La flota no es grande (Cultura)"{
+		assert.notThat(cultura.esGrande())
+	}
+	
+	test "La capacidad faltante (Cultura)"{
+		assert.equals(5, cultura.capacidadFaltante())
+	}
+}
+
+
